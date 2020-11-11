@@ -36,20 +36,15 @@ export function* isUserAuthenticated () {
     try {
         const user = yield getCurrentUser().then(userAuth => {
             if (userAuth) {
-                console.log(userAuth);
                 return userAuth;
             };
             return null;
         });
-        
         if(!user) return;
-
-        // console.log(userAuth);
-        // if(!userAuth) return;
         yield getSnapshotRefFromUserAuth(user);
     } catch (error) {
         yield put(signInFailure(error));
-    }
+    } 
 };
 
 export function* signOut () {
